@@ -46,12 +46,12 @@ const Shop = () => {
         <>
             <Container maxWidth="auto">
                 <Grid container spacing={4}>
-                    <Grid item xs={12} sm={12} md={7} lg={8} style={{borderRight: '1px solid gray'}}>
+                    <Grid item xs={12} sm={12} md={7} lg={8} style={{borderRight: '1px solid gray'}} order={2}>
                         {
                             products.map(product => <SingleProducts key={product.key} product={product} handleAddToCart={handleAddToCart} />)
                         }
                     </Grid>
-                    <Grid item xs={12} sm={12} md={5} lg={4}>
+                    <Grid item xs={12} sm={12} md={5} lg={4} order={1}>
                         <Cart carts = {carts} showReviewButton = {true} />
                     </Grid>
                 </Grid>
