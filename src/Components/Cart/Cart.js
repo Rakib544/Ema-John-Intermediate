@@ -18,10 +18,10 @@ const Cart = ({ carts, showReviewButton, handlePlaceItemBtn }) => {
 
     return (
         <>
-            <Typography variant="h5" color="secondary" align="center">
+            <Typography variant="h5" color="primary" align="center">
                 Order Summary
             </Typography>
-            <Typography variant="h6" color="secondary" align="center">
+            <Typography variant="h6" color="primary" align="center">
                 Items Ordered - {carts.length}
             </Typography>
             <br />
