@@ -2,9 +2,9 @@ import { Button, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Cart = ({ carts, showReviewButton, handlePlaceItemBtn }) => {
+const Cart = ({ carts, showReviewButton, handleShowProceedOrder }) => {
 
-    const subTotal = carts.reduce((sum, product) => sum += product.price * product.quantity, 0)
+    const subTotal = carts.reduce((sum, product) => sum += product.price * (product.quantity || 1), 0)
     const tax = subTotal * 0.1;
     let shipping;
     if (subTotal > 0 && subTotal < 50) {
@@ -49,8 +49,8 @@ const Cart = ({ carts, showReviewButton, handlePlaceItemBtn }) => {
                                     Review Order
                             </Button>
                             </Link>
-                            : <Button variant="contained" color="primary" onClick={handlePlaceItemBtn}>
-                                Place Item
+                            : <Button variant="contained" color="primary" onClick={handleShowProceedOrder}>
+                                Proceed Order
                         </Button>
                     }
                 </Grid>

@@ -1,19 +1,24 @@
 import { ButtonBase, Container, Grid, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import fakeData from '../../fakeData';
 
 const ShowProductDetails = () => {
     const { key } = useParams()
-    const product = fakeData.find(pd => pd.key === key);
+    const [selectProduct, setSelectProduct] = useState({})
+    useEffect(() => {
+        fetch(`http://localhost:8080/product/${key}`)
+        .then(res => res.json())
+        .then(data => setSelectProduct(data))
+    }, [key])
 
-    const { name, img, seller, stock, price } = product;
+    const { name, img, seller, stock, price } = selectProduct;
     return (
         <div>
             <Container maxWidth="md">
                 <Grid container gutterBottom align="center">
                     <Grid item lg={12} align="center">
-                    <ButtonBase >
+                        <ButtonBase >
                             <img src={img} alt={name} />
                         </ButtonBase>
                     </Grid>

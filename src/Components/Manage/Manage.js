@@ -1,13 +1,21 @@
-import { Typography } from '@material-ui/core';
+import { Button, Container, Typography } from '@material-ui/core';
 import React from 'react';
-
+import fakeData from '../../fakeData'
 const Manage = () => {
+    const handleAddProducts = () => {
+        fetch(`http://localhost:8080/addProducts`, {
+            method: "POST",
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify(fakeData)
+        })
+    }
     return (
-        <div>
+        <Container maxWidth="md" align="center">
             <Typography variant="h5" color="primary" align="center">
-                This is Manage Page
+                Products Add Here
             </Typography>
-        </div>
+            <Button onClick={handleAddProducts} style={{marginTop: '20px'}} variant="contained" color="primary">Add Products</Button >
+        </Container>
     );
 };
 

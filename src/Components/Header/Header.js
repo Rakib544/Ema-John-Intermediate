@@ -1,9 +1,11 @@
 import { Button, ButtonBase, ButtonGroup, Container } from '@material-ui/core';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
+import { UserContext } from '../../App';
 import logo from '../../images/logo.png';
 
 const Header = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const history = useHistory()
 
     const goToHomePage = () => {
@@ -16,17 +18,27 @@ const Header = () => {
     const goToReviewPage = () => {
         history.push(`/review`)
     }
-    return ( 
+
+    const goToSignInPage = () => {
+        history.push(`/login`)
+    }
+    return (
         <Container maxWidth="lg">
-            <ButtonBase style={{display: 'block', margin: "auto"}}>
-                <img src={logo} alt="logo" style={{height: '80px'}} />
+            <ButtonBase style={{ display: 'block', margin: "auto" }}>
+                <img src={logo} alt="logo" style={{ height: '80px' }} />
             </ButtonBase>
-            <div style={{display: "flex", justifyContent: 'center', marginTop: "20px"}}>
-            <ButtonGroup variant="outlined" color="primary">
-                <Button onClick={goToHomePage}>Shop</Button>
-                <Button onClick={goToReviewPage}>Order-Review</Button>
-                <Button onClick={goToManagePage}>Manage</Button>
-            </ButtonGroup>
+            <div style={{ display: "flex", justifyContent: 'center', marginTop: "20px" }}>
+                <ButtonGroup variant="outlined" color="primary">
+                    <Button onClick={goToHomePage}>Shop</Button>
+                    <Button onClick={goToReviewPage}>Order-Review</Button>
+                    <Button onClick={goToManagePage}>Manage</Button>
+                    {
+                        loggedInUser.email
+                            ? <Button onClick={() => setLoggedInUser({})}>LogOut</Button>
+                            : <Button onClick={goToSignInPage}>SignIn</Button>
+
+                    }
+                </ButtonGroup>
             </div>
             <br />
         </Container>

@@ -1,6 +1,6 @@
 import { Container, Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import fakeData from '../../fakeData';
+import { useHistory } from 'react-router';
 import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
 import CartSingleProduct from '../CartSingleProduct/CartSingleProduct';
@@ -11,12 +11,14 @@ const Review = () => {
     useEffect(() => {
         const savedCart = getDatabaseCart();
         const productsKeys = Object.keys(savedCart)
-        const products = productsKeys.map(existingKey => {
-            const product = fakeData.find(pd => pd.key === existingKey)
-            product.quantity = savedCart[existingKey]
-            return product
+        fetch('http://localhost:8080/savedProducts', {
+            method: "POST",
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify(productsKeys)
         })
-        setCartProduct(products)
+        .then(res => res.json())
+        .then(data => setCartProduct(data))
+        
     }, [])
 
     const handleRemoveFromCart = product => {
@@ -25,9 +27,9 @@ const Review = () => {
         removeFromDatabaseCart(product.key)
     }
 
-    const handlePlaceItemBtn = () => {
-        setCartProduct([])
-        processOrder()
+    const history = useHistory();
+    const handleShowProceedOrder = () => {
+        history.push(`/proceed-order`)
     }
     
     return (
@@ -40,7 +42,7 @@ const Review = () => {
                         }
                     </Grid>
                     <Grid item lg="4">
-                        <Cart carts = {cartProduct} showReviewButton={false} handlePlaceItemBtn={handlePlaceItemBtn} />
+                        <Cart carts = {cartProduct} showReviewButton={false} handleShowProceedOrder={handleShowProceedOrder} />
                     </Grid>
                 </Grid>
             </Container>
