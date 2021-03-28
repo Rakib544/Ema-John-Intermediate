@@ -11,7 +11,7 @@ const Review = () => {
     useEffect(() => {
         const savedCart = getDatabaseCart();
         const productsKeys = Object.keys(savedCart)
-        fetch('http://localhost:8080/savedProducts', {
+        fetch('https://murmuring-beyond-43171.herokuapp.com/savedProducts', {
             method: "POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(productsKeys)

@@ -7,7 +7,7 @@ const ShowProductDetails = () => {
     const { key } = useParams()
     const [selectProduct, setSelectProduct] = useState({})
     useEffect(() => {
-        fetch(`http://localhost:8080/product/${key}`)
+        fetch(`https://murmuring-beyond-43171.herokuapp.com/product/${key}`)
         .then(res => res.json())
         .then(data => setSelectProduct(data))
     }, [key])

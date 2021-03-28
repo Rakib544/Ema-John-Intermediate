@@ -3,7 +3,7 @@ import React from 'react';
 import fakeData from '../../fakeData'
 const Manage = () => {
     const handleAddProducts = () => {
-        fetch(`http://localhost:8080/addProducts`, {
+        fetch(`https://murmuring-beyond-43171.herokuapp.com/addProducts`, {
             method: "POST",
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify(fakeData)
