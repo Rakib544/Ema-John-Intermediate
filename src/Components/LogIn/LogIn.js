@@ -116,7 +116,6 @@ const LogIn = () => {
                     newUser.success = false;
                     newUser.error = err.message;
                     setUser(newUser)
-                    console.log(err)
                     setLoggedInUser(newUser)
                 })
         }
